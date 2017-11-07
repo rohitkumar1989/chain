@@ -17,7 +17,7 @@ class cash_dispense{
 		next->handle(currency_remain);
 	}
 
-    void add(cash_dispense* c){
+    void add(cash_dispense* c){//add object in chain
     
         if(next==NULL){
             next=c;
@@ -63,7 +63,7 @@ class cash_five_hundred:public cash_dispense{
 		  five_hundred++;
 		  cash_dispense::handle(cash);
 	  }else if(cash<500){
-		   cash_dispense::handle(cash);
+		   cash_dispense::handle(cash);//call super handle so that next object on thhe chain get called
 	  }
 	  
 	}
@@ -102,15 +102,15 @@ int main(){
 	int cash=29999;
 	
 	//base* b;
-	cash_two_thousand root;
+	cash_two_thousand root;//first object of the chain;
 	cash_five_hundred five;
 	cash_one_hundred one;
 	
-	root.add(&five);
-	root.add(&one);
-	one.set_next(&root);
+	root.add(&five);//add other objects to the chain
+	root.add(&one);// add othher objects to the chain
+	one.set_next(&root);//last element in chain points to first and make chain circular
 	
-	root.handle(cash);
+	root.handle(cash);//call chhain of actions...
 	
 	cout<<"dispense amount :\n Two thousand "<<root.get_val()<<" \n five hundered "<<five.get_val()<<" \none hundered "<<one.get_val();;
 	
